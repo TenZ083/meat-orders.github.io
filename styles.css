@@ -1,0 +1,150 @@
+/* ============================================================
+   Мясо · Заказы — Design System
+   Единые стили для admin / picker / razdelka / index
+============================================================ */
+:root{
+  --bg:#0e1015;
+  --surface:#161921;
+  --surface-2:#1d2130;
+  --border:#2b3140;
+  --text:#f2f5fa;
+  --muted:#9aa6ba;
+  --primary:#ff5a3c;          /* warm "meat" coral */
+  --primary-2:#ff8a3c;
+  --accent:#16c79a;            /* fresh green for "собрано / ok" */
+  --danger:#ff4d67;
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow:0 12px 30px rgba(0,0,0,.35);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:var(--font);
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(255,90,60,.12), transparent 60%),
+    radial-gradient(900px 500px at 10% 0%, rgba(22,199,154,.08), transparent 55%),
+    var(--bg);
+  min-height:100vh;
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- shell ---------- */
+.app{max-width:960px;margin:0 auto;padding:18px 16px 40px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  display:flex;align-items:center;gap:14px;
+  padding:16px 0 10px;
+}
+.logo{
+  width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+  font-size:26px;background:linear-gradient(135deg,var(--primary),var(--primary-2));
+  box-shadow:0 8px 24px rgba(255,90,60,.35);flex:none;
+}
+.brand{display:flex;flex-direction:column;line-height:1.15}
+.brand .title{font-size:20px;font-weight:800;letter-spacing:.2px}
+.brand .sub{font-size:13px;color:var(--muted)}
+
+/* ---------- nav pills (scrollable) ---------- */
+.nav{display:flex;gap:8px;overflow-x:auto;padding:6px 0 14px;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:none;font-weight:700;color:var(--muted);text-decoration:none;
+  padding:9px 14px;border-radius:999px;background:var(--surface);border:1px solid var(--border)}
+.nav a.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));
+  border-color:transparent;box-shadow:0 8px 20px rgba(255,90,60,.3)}
+
+/* ---------- stat tiles ---------- */
+.stats{display:grid;gap:12px;margin-bottom:18px}
+.stats.cols-4{grid-template-columns:repeat(4,1fr)}
+.stats.cols-3{grid-template-columns:repeat(3,1fr)}
+.stats.cols-2{grid-template-columns:repeat(2,1fr)}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:14px;text-align:center}
+.stat .label{font-size:12px;color:var(--muted);letter-spacing:.3px;text-transform:uppercase}
+.stat .value{font-size:26px;font-weight:800;margin-top:4px}
+.stat .unit{font-size:14px;color:var(--muted);font-weight:600}
+
+/* ---------- section title ---------- */
+.section-title{display:flex;align-items:center;gap:8px;font-size:15px;font-weight:700;margin:6px 0 12px}
+
+/* ---------- card ---------- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;box-shadow:var(--shadow)}
+.card + .card{margin-top:14px}
+
+/* ---------- segmented tabs ---------- */
+.segmented{display:flex;background:var(--surface-2);border:1px solid var(--border);
+  border-radius:12px;padding:4px;gap:4px}
+.segmented button{flex:1;border:none;background:transparent;color:var(--muted);
+  font-weight:700;font-size:14px;padding:10px 8px;border-radius:9px;cursor:pointer;transition:.15s}
+.segmented button.active{color:#fff;background:linear-gradient(135deg,var(--primary),var(--primary-2));
+  box-shadow:0 6px 16px rgba(255,90,60,.3)}
+
+/* ---------- fields ---------- */
+.field{margin-top:14px}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--muted);
+  letter-spacing:.3px;text-transform:uppercase;margin-bottom:6px}
+.input,select,textarea{width:100%;background:#0c0e13;border:1px solid var(--border);color:var(--text);
+  border-radius:var(--radius-sm);padding:12px;font-size:15px;font-family:inherit;outline:none}
+.input:focus,select:focus,textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(255,90,60,.18)}
+textarea{resize:vertical;min-height:96px}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;
+  font-weight:700;font-size:15px;border:none;border-radius:var(--radius-sm);padding:13px 16px;color:#fff}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-2));
+  box-shadow:0 10px 24px rgba(255,90,60,.3)}
+.btn-accent{background:linear-gradient(135deg,#0fbf8a,#16c79a);box-shadow:0 10px 24px rgba(22,199,154,.25)}
+.btn-ghost{background:var(--surface-2);border:1px solid var(--border);color:var(--text)}
+.btn-danger{background:linear-gradient(135deg,#ff4d67,#ff7a45);box-shadow:0 10px 24px rgba(255,77,103,.25)}
+.btn-block{display:flex;width:100%}
+
+/* ---------- empty / loading states ---------- */
+.empty{text-align:center;color:var(--muted);padding:26px 12px}
+.empty .emoji{font-size:40px;opacity:.7;display:block;margin-bottom:8px}
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--muted);padding:22px}
+.spinner{width:20px;height:20px;border:3px solid var(--border);border-top-color:var(--primary);
+  border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- keypad (picker modal) ---------- */
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.key{font-size:22px;font-weight:700;padding:14px;border-radius:12px;background:var(--surface-2);
+  border:1px solid var(--border);color:var(--text);cursor:pointer}
+.key.confirm{grid-column:1/-1;background:linear-gradient(135deg,var(--primary),var(--primary-2));
+  color:#fff;border:none;box-shadow:0 8px 20px rgba(255,90,60,.3)}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;z-index:50;display:none}
+.modal.open{display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:480px;background:var(--surface);border:1px solid var(--border);
+  border-radius:20px 20px 0 0;padding:18px;box-shadow:0 -12px 40px rgba(0,0,0,.5)}
+.sheet-head{display:flex;align-items:center;justify-content:space-between;font-weight:700}
+
+/* ---------- big action cards (picker) ---------- */
+.action-card{display:flex;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:18px;margin-top:12px;cursor:pointer}
+.action-card .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;font-size:26px;flex:none}
+.action-card h3{margin:0;font-size:17px}
+.action-card p{margin:4px 0 0;color:var(--muted);font-size:13px}
+
+/* ---------- radios / chips (razdelka) ---------- */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{padding:9px 14px;border-radius:999px;background:var(--surface-2);border:1px solid var(--border);
+  color:var(--muted);font-weight:700;font-size:14px;cursor:pointer}
+.chip.active{color:#fff;border-color:transparent;background:linear-gradient(135deg,var(--primary),var(--primary-2))}
+
+/* ---------- order row (list item) ---------- */
+.row{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
+.row:last-child{border-bottom:none}
+.row .meta{color:var(--muted);font-size:13px}
+
+/* ---------- utility ---------- */
+.mt{margin-top:14px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.stats.cols-4{grid-template-columns:repeat(2,1fr)}}

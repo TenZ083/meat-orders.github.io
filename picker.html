@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Заказы мяса · Сборка</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- top bar -->
+  <header class="topbar">
+    <div class="logo">🥩</div>
+    <div class="brand">
+      <span class="title">Мясо · Заказы</span>
+      <span class="sub">Сборка</span>
+    </div>
+  </header>
+
+  <!-- nav -->
+  <nav class="nav" data-hook="nav-picker">
+    <a href="index.html">Главная</a>
+    <a href="admin.html">📋 Админ</a>
+    <a href="#" class="active">📦 Сборка</a>
+    <a href="razdelka.html">🔪 Разделка</a>
+  </nav>
+
+  <!-- stats -->
+  <section class="stats cols-3" data-hook="picker-stats">
+    <div class="stat"><div class="label">Всего заказов</div><div class="value" data-value="total">0</div></div>
+    <div class="stat"><div class="label">Собрано</div><div class="value" data-value="collected">0</div></div>
+    <div class="stat"><div class="label">Осталось</div><div class="value" data-value="left">0</div></div>
+  </section>
+
+  <!-- mode cards -->
+  <h2 class="section-title">Сборка заказов</h2>
+  <button class="action-card" data-hook="mode-shop">
+    <span class="ico" style="background:rgba(255,90,60,.15)">🏪</span>
+    <div><h3>Магазины</h3><p>Собрать по товарам для всех магазинов</p></div>
+  </button>
+  <button class="action-card" data-hook="mode-client">
+    <span class="ico" style="background:rgba(22,199,154,.15)">👥</span>
+    <div><h3>Клиенты</h3><p>Собрать все товары для одного клиента</p></div>
+  </button>
+
+</div>
+
+<!-- weight modal -->
+<div class="modal" id="weight-modal" data-hook="weight-modal">
+  <div class="sheet">
+    <div class="sheet-head">
+      <span>← Назад</span>
+      <span style="color:var(--muted)" data-hook="modal-product">Выбери товар</span>
+      <button aria-label="close" data-hook="modal-close" style="border:none;background:none;cursor:pointer;font-size:20px">✕</button>
+    </div>
+
+    <input class="input mt" inputmode="decimal" placeholder="Введи вес" id="weight-display" data-hook="weight-display">
+
+    <!-- keypad -->
+    <div class="keypad" data-hook="keypad">
+      <button class="key" data-key="7">7</button>
+      <button class="key" data-key="8">8</button>
+      <button class="key" data-key="9">9</button>
+      <button class="key" data-key="4">4</button>
+      <button class="key" data-key="5">5</button>
+      <button class="key" data-key="6">6</button>
+      <button class="key" data-key="1">1</button>
+      <button class="key" data-key="2">2</button>
+      <button class="key" data-key="3">3</button>
+      <button class="key" data-key="C">C</button>
+      <button class="key" data-key="0">0</button>
+      <button class="key" data-key=".">.</button>
+      <button class="key confirm" data-hook="confirm-weight">✓ Подтвердить вес</button>
+    </div>
+  </div>
+</div>
+
+<!-- empty state (shown when no orders to collect) -->
+<div class="card mt" data-hook="picker-empty" hidden>
+  <div class="empty"><span class="emoji">📦</span>Нет заказов для сборки<br><small>Все заказы собраны или ещё не добавлены</small></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

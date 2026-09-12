@@ -1,0 +1,16 @@
+{
+  "name": "Заказы мяса",
+  "short_name": "Мясо",
+  "description": "Приложение для сборки заказов мяса",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f1116",
+  "theme_color": "#ff5a3c",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥩</text></svg>",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

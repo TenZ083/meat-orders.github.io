@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Заказы мяса · Разделка</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- top bar -->
+  <header class="topbar">
+    <div class="logo">🥩</div>
+    <div class="brand">
+      <span class="title">Мясо · Заказы</span>
+      <span class="sub">Разделка</span>
+    </div>
+  </header>
+
+  <!-- nav -->
+  <nav class="nav" data-hook="nav-razdelka">
+    <a href="index.html">Главная</a>
+    <a href="admin.html">📋 Админ</a>
+    <a href="picker.html">📦 Сборка</a>
+    <a href="#" class="active">🔪 Разделка</a>
+  </nav>
+
+  <!-- stats -->
+  <section class="stats cols-2" data-hook="razdelka-stats">
+    <div class="stat"><div class="label">Партий сырья сегодня</div><div class="value" data-value="batches">0</div></div>
+    <div class="stat"><div class="label">Позиций вышло</div><div class="value" data-value="items-out">0</div></div>
+  </section>
+
+  <!-- new razdelka form -->
+  <h2 class="section-title">➕ Новая разделка</h2>
+  <form class="card" data-hook="razdelka-form">
+    <div class="field">
+      <label>Кто разделывал</label>
+      <div class="chips" data-hook="worker">
+        <button type="button" class="chip active" data-worker="ira">Ира</button>
+        <button type="button" class="chip" data-worker="vasya">Вася</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="r-cat">Категория</label>
+      <select id="r-cat"><option value="chicken">Курица</option><option value="turkey">Индюк</option><option value="pork">Свинина</option></select>
+    </div>
+
+    <div class="field">
+      <label>Источник сырья</label>
+      <div class="chips" data-hook="source">
+        <button type="button" class="chip active" data-source="whole">Целая тушка</button>
+        <button type="button" class="chip" data-source="ready">Готовый товар (напр. Бедро)</button>
+      </div>
+    </div>
+
+    <div class="field"><label for="r-product">Какой товар разделываем</label>
+      <input id="r-product" class="input"></div>
+
+    <div class="field"><label for="r-input-weight">Сколько взяли на разделку (кг)</label>
+      <input id="r-input-weight" class="input" inputmode="decimal"></div>
+
+    <!-- dynamic "what came out" rows -->
+    <div class="field">
+      <label>Сколько чего вышло (кг)</label>
+      <p class="meta" style="color:var(--muted);font-size:13px">Заполни только те позиции, которые реально получили</p>
+      <div class="stack" data-hook="out-rows"></div>
+    </div>
+
+    <button type="submit" class="btn btn-accent btn-block mt">💾 Сохранить разделку</button>
+  </form>
+
+  <!-- taken today -->
+  <h2 class="section-title mt">📋 Взято на разделку сегодня</h2>
+  <div class="card" data-hook="taken-list">
+    <div class="loading"><span class="spinner"></span>Загрузка...</div>
+  </div>
+
+  <!-- output summary -->
+  <h2 class="section-title mt">📊 Разделано сегодня — по товарам</h2>
+  <div class="card" data-hook="output-summary">
+    <div class="loading"><span class="spinner"></span>Загрузка...</div>
+  </div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Заказы мяса · Админ</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- top bar -->
+  <header class="topbar">
+    <div class="logo">🥩</div>
+    <div class="brand">
+      <span class="title">Мясо · Заказы</span>
+      <span class="sub">Админ-панель</span>
+    </div>
+  </header>
+
+  <!-- nav -->
+  <nav class="nav" data-hook="nav-admin">
+    <a href="#" class="active">📋 Админ</a>
+    <a href="picker.html">📦 Сборка</a>
+    <a href="razdelka.html">🔪 Разделка</a>
+  </nav>
+
+  <!-- stats -->
+  <section class="stats cols-4" data-hook="admin-stats">
+    <div class="stat"><div class="label">Клиентов сегодня</div><div class="value" data-value="clients">0</div></div>
+    <div class="stat"><div class="label">Позиций</div><div class="value" data-value="items">0</div></div>
+    <div class="stat"><div class="label">Собрано</div><div class="value" data-value="collected">0 <span class="unit">кг</span></div></div>
+    <div class="stat"><div class="label">Сумма</div><div class="value" data-value="sum">0 <span class="unit">₴</span></div></div>
+  </section>
+
+  <!-- summary -->
+  <h2 class="section-title">📊 Сводка по товарам</h2>
+  <div class="card" data-hook="summary">
+    <div class="empty"><span class="emoji">📦</span>Нет заказов</div>
+  </div>
+
+  <!-- add order -->
+  <div class="card mt">
+    <div class="segmented" data-hook="add-tabs">
+      <button class="active" data-pane="fast">⚡ Быстро</button>
+      <button data-pane="manual">✍️ Вручную</button>
+      <button data-pane="batch">📋 Массово</button>
+    </div>
+
+    <!-- fast -->
+    <form class="field" data-hook="fast-form">
+      <label for="fast-line">Введи строку из Viber</label>
+      <input id="fast-line" class="input" placeholder='Формат: "Клиент товар вес". Примеры: "Поке Арка бедро 15", "Южная филе 30"'>
+      <button type="submit" class="btn btn-primary btn-block mt">➕ Добавить</button>
+    </form>
+
+    <!-- manual -->
+    <form class="field" data-hook="manual-form" hidden>
+      <div class="grid-2">
+        <div><label for="m-cat">Категория</label>
+          <select id="m-cat"><option value="client">Клиент</option><option value="shop">Магазин</option></select></div>
+        <div class="field" style="margin-top:0"><label for="m-client">Клиент / Магазин</label>
+          <input id="m-client" class="input"></div>
+      </div>
+      <div class="grid-2">
+        <div><label for="m-product">Товар</label><input id="m-product" class="input"></div>
+        <div class="field" style="margin-top:0"><label for="m-weight">Заказано (кг)</label>
+          <input id="m-weight" class="input" inputmode="decimal"></div>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block mt">➕ Добавить заказ</button>
+    </form>
+
+    <!-- batch -->
+    <form class="field" data-hook="batch-form" hidden>
+      <label for="b-cat">Категория</label>
+      <select id="b-cat"><option value="client">Клиент</option><option value="shop">Магазин</option></select>
+      <div class="field"><label for="b-client">Клиент / Магазин</label>
+        <input id="b-client" class="input"></div>
+      <div class="field"><label for="b-lines">Список товаров</label>
+        <textarea id="b-lines" placeholder='Формат: "товар вес" на каждой строке'></textarea></div>
+      <button type="submit" class="btn btn-primary btn-block mt">📋 Добавить все</button>
+    </form>
+  </div>
+
+  <!-- excel exports -->
+  <div class="stack mt">
+    <button class="btn btn-ghost btn-block" data-hook="export-shop-collected">📊 Excel · Магазины (собранные)</button>
+    <button class="btn btn-ghost btn-block" data-hook="export-shop-all">📊 Excel · Магазины (все)</button>
+    <button class="btn btn-ghost btn-block" data-hook="export-client-collected">📊 Excel · Клиенты (собранные)</button>
+  </div>
+
+  <!-- finish day -->
+  <button class="btn btn-danger btn-block mt" data-hook="finish-day">🌙 Завершить день</button>
+
+  <!-- today orders -->
+  <h2 class="section-title mt">📋 Заказы на сегодня</h2>
+  <div class="card" data-hook="orders-list">
+    <div class="loading"><span class="spinner"></span>Загрузка...</div>
+  </div>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>
