@@ -135,7 +135,7 @@ function row(o){return '<button class="pick-row" data-order="'+o.id+'"><span>'+ 
 
 let activeMode='shop';
 function bindPicker(){
-  const el=document.querySelector('[data-hook="picker"]');if(!el)return;
+  const el=document.querySelector('[data-hook="nav-picker"]');if(!el)return;
   document.querySelectorAll('.action-card').forEach(c=>c.addEventListener('click',()=>{activeMode=(c.dataset.hook==='mode-client')?'client':'shop';renderPickList();}));
   // keypad
   document.querySelectorAll('[data-key]').forEach(k=>k.addEventListener('click',()=>{
@@ -152,11 +152,12 @@ function bindPicker(){
 /* ---- admin ---- */
 function bindAdmin(){
   // tabs
-  const tabs=document.getElementById('add-tabs');
-  if(tabs){tabs.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-    document.querySelector('[data-hook="fast-form"]')&&(document.querySelector('[data-hook="fast-form"]').hidden=t.dataset.tab!=='fast');
-    document.querySelector('[data-hook="manual-form"]')&&(document.querySelector('[data-hook="manual-form"]').hidden=t.dataset.tab!=='manual');
-    document.querySelector('[data-hook="batch-form"]')&&(document.querySelector('[data-hook="batch-form"]').hidden=t.dataset.tab!=='batch');
+  const tabs=document.querySelector('[data-hook="add-tabs"]');
+  if(tabs){tabs.querySelectorAll('button[data-pane]').forEach(t=>t.addEventListener('click',()=>{
+    const p=t.dataset.pane;
+    document.querySelector('[data-hook="fast-form"]')&&(document.querySelector('[data-hook="fast-form"]').hidden=p!=='fast');
+    document.querySelector('[data-hook="manual-form"]')&&(document.querySelector('[data-hook="manual-form"]').hidden=p!=='manual');
+    document.querySelector('[data-hook="batch-form"]')&&(document.querySelector('[data-hook="batch-form"]').hidden=p!=='batch');
   }));}
 
   // fast form (line)
@@ -191,13 +192,12 @@ function renderAdmin(){
   const t=S.orders.length;
   const pos=S.orders.reduce((a,o)=>a+(o.ordered?1:0),0);
   const kg=S.orders.reduce((a,o)=>a+(o.collected||0),0);
-  document.querySelector('[data-value="clients"]')&&(document.querySelector('[data-value="clients"]').textContent=t);
-  document.querySelector('[data-value="positions"]')&&(document.querySelector('[data-value="positions"]').textContent=pos);
-  document.querySelector('[data-value="kg-collected"]')&&(document.querySelector('[data-value="kg-collected"]').textContent=kg);
+  const sv=(k,v)=>{const n=document.querySelector('[data-value="'+k+'"]');if(n)n.textContent=v;};
+  sv('clients',t);sv('items',pos);sv('collected',kg);
 
   // summary by product
   const sum={};S.orders.forEach(o=>{sum[o.product]=(sum[o.product]||0)+(o.ordered||0);});
-  const sc=document.querySelector('[data-hook="summary-by-product"]');
+  const sc=document.querySelector('[data-hook="summary"]');
   if(sc){if(!Object.keys(sum).length){sc.innerHTML='<div class="empty">Нет заказов</div>';}else{let h='';Object.keys(sum).sort().forEach(p=>{h+='<div class="sum-row"><span>'+p+'</span><b>'+sum[p]+' кг</b></div>';});sc.innerHTML=h;}}
 
   // orders list
@@ -242,10 +242,12 @@ function renderRazdelka(){
 }
 
 /* ---- boot ---- */
+function safe(n,f){try{f()}catch(e){console.error('init:',n,e)}}
 function init(){
-  if(document.getElementById('add-tabs')||document.querySelector('[data-hook="fast-form"]')){bindAdmin();renderAdmin();}
-  if(document.getElementById('weight-modal')){bindPicker();renderPickList();}
-  if(document.querySelector('[data-hook="razdelka-form"]')){bindRazdelka();renderRazdelka();}
+  const hasAdmin=()=>document.getElementById('add-tabs')||document.querySelector('[data-hook="fast-form"]');
+  if(hasAdmin()){safe('admin',bindAdmin);safe('admin-render',renderAdmin);}
+  if(document.getElementById('weight-modal')){safe('picker',bindPicker);safe('pick-list',renderPickList);}
+  if(document.querySelector('[data-hook="razdelka-form"]')){safe('razdelka',bindRazdelka);safe('razdelka-render',renderRazdelka);}
 }
 document.readyState==='loading'?document.addEventListener('DOMContentLoaded',init):init();
 })();
